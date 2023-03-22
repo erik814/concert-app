@@ -9,6 +9,19 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 
+    getBandsByUser(req, res) {
+        const userId = req.params.userId;
+
+        Band.find({ userId: userId })
+            .then(bands => {
+                res.json({ bands: bands });
+            })
+            .catch(err => {
+                console.error(err);
+                res.status(500).json({ message: 'Server Error' });
+            });
+    },
+
     createBand(req, res) {
         Band.create(req.body)
             .then((data) => 

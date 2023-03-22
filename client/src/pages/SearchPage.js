@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { BandList } from "./components"
 
 const SearchPage = ({user}) => {
     const [searchQuery, setSearchQuery] = useState("");
@@ -70,7 +71,9 @@ const SearchPage = ({user}) => {
                     <button type="submit">Search</button>
                 </form>
 
-                
+                <div className='band-list'>
+                    <BandList.jsx user={user} />
+                </div>
             </div>
 
             <div className='search-right'>
