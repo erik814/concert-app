@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 
 const SearchPage = ({user}) => {
     const [searchQuery, setSearchQuery] = useState("");
-    const [searchResults, setSearchResults] = useState([]);
+    const [bandResults, setBandResults] = useState([]);
+    const [showResults, setShowResults] = useState([]);
 
     const handleInputChange = (e) => {
         setSearchQuery(e.target.value);
@@ -31,6 +32,9 @@ const SearchPage = ({user}) => {
         .then(data => {
             const [showsData, bandData] = data;
             // set state variables using showsData and bandData
+            setBandResults(bandData);
+            setShowResults(showsData);
+            console.log(bandData)
         })
         .catch(error => console.error(error));
 };
@@ -78,12 +82,12 @@ const SearchPage = ({user}) => {
 
             <div className='search-right'>
                 <div className='band-header'>
-                    <img src={searchResults[0].performers?.image}/>
+                    <img src={bandResults.performers?.[0].image}/>
                 </div>
 
                 <div className='show-results'>
-                    {searchResults.events?.map((event) => (
-                        <div class='results' key={event.id}>
+                    {showResults.events?.map((event) => (
+                        <div className='results' key={event.id}>
                             <p>{event.datetime_local}</p>
                             <p>{event.venue.name}</p>
                             <p>{event.venue.city}, {event.venue.state}</p>
@@ -93,7 +97,7 @@ const SearchPage = ({user}) => {
                                 </div>
                             ))}
                             <div>
-                                <a href={event.url}>Get Tickets</a>
+                                <a href={event.url} target='blank'>Get Tickets</a>
                             </div>
                         </div>
                     ))}
