@@ -5,8 +5,7 @@ const bandSchema = new Schema({
     name: {
         type: String,
     },
-
-    users: [
+    userId: [
         {
             type: Schema.Types.ObjectId,
             ref: "User"

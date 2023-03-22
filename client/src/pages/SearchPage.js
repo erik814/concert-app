@@ -34,39 +34,30 @@ const SearchPage = ({user}) => {
             // set state variables using showsData and bandData
             setBandResults(bandData);
             setShowResults(showsData);
-            console.log(bandData)
+            addBand();
         })
         .catch(error => console.error(error));
-};
+    };
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     fetch('/api/seat/shows', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({ searchQuery }),
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => setSearchResults(data))
-    //         .catch(error => console.error(error));
-    // };
-
-    // // // this search is for the band itself
-    // // const handleSubmit = (e) => {
-    // //     e.preventDefault();
-    // //     fetch('/api/seat/band', {
-    // //         method: 'POST',
-    // //         headers: {
-    // //             'Content-Type': 'application/json',
-    // //         },
-    // //         body: JSON.stringify({ searchQuery }),
-    // //     })
-    // //         .then(res => res.json())
-    // //         .then(data => setSearchResults(data))
-    // //         .catch(error => console.error(error));
-    // // };
+    function addBand() {
+        fetch('/api/band', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: searchQuery,
+                userId: user._id,
+            }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to create band');
+            }
+            console.log('Band created successfully');
+        })
+        .catch(error => console.error(error));
+    }
 
     return (
         <div className='search-page'>
@@ -78,6 +69,8 @@ const SearchPage = ({user}) => {
                     </label>
                     <button type="submit">Search</button>
                 </form>
+
+                
             </div>
 
             <div className='search-right'>
@@ -103,13 +96,6 @@ const SearchPage = ({user}) => {
                     ))}
                 </div>
             </div>
-
-            {/* <p>{searchResults.performers?.[0].name}</p>
-            <img src={searchResults.performers?.[0].image} alt={searchResults.performers?.[0].name}/>
-            <div>
-                <a href={searchResults.performers?.[0].url}>Get Tickets</a>
-            </div> */}
-
         </div>
     )
 }
