@@ -5,7 +5,8 @@ import { Header, Wrapper } from "./components"
 import { HomePage, LoginPage, SearchPage, ProfilePage, SignupPage } from "./pages";
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles/global.css'
+// import './styles/global.css'
+import './styles/style.scss'
 
 function App() {
   const [ user, setUser ] = useState(null)
