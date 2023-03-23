@@ -32,7 +32,6 @@ const SearchPage = ({user}) => {
         .then(responses => Promise.all(responses.map(res => res.json())))
         .then(data => {
             const [showsData, bandData] = data;
-            // set state variables using showsData and bandData
             setBandResults(bandData);
             setShowResults(showsData);
             addBand();
@@ -72,7 +71,7 @@ const SearchPage = ({user}) => {
                 </form>
 
                 <div className='band-list'>
-                    <BandList user={user} />
+                    <BandList user={user} setBandResults={setBandResults} setShowResults={setShowResults} />
                 </div>
             </div>
 

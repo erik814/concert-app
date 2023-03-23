@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-const BandList = ({user}) => {
+const BandList = ({user, setBandResults, setShowResults}) => {
     const [bandList, setBandList] = useState([])
 
     useEffect(() => {
@@ -20,12 +20,37 @@ const BandList = ({user}) => {
         }
     }, [user])
 
-    
+
+        const handleClick = (searchQuery) => {
+            Promise.all([
+                fetch('/api/seat/shows', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ searchQuery }),
+                }),
+                fetch('/api/seat/band', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ searchQuery }),
+                })
+            ])
+            .then(responses => Promise.all(responses.map(res => res.json())))
+            .then(data => {
+                const [showsData, bandData] = data;
+                setBandResults(bandData);
+                setShowResults(showsData);
+            })
+            .catch(error => console.error(error));
+        };
 
     return (
         <div>
             {bandList.map((band) => (
-                <button key={band._id} onClick={handleSubmit()}>{band.name}</button>
+                <button key={band._id} onClick={() => {handleClick(band.name)}}>{band.name}</button>
             ))}
         </div>
     )
