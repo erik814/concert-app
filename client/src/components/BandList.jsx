@@ -10,7 +10,6 @@ const BandList = ({user, setBandResults, setShowResults}) => {
                 .then(res => res.json())
                 .then(data => {
                     setBandList(data.bands)
-                    console.log('bandlist: ', bandList)
                 })
                 .catch(err => console.error(err));
         }
@@ -48,9 +47,9 @@ const BandList = ({user, setBandResults, setShowResults}) => {
         };
 
     return (
-        <div>
+        <div className='band-list'>
             {bandList.map((band) => (
-                <button key={band._id} onClick={() => {handleClick(band.name)}}>{band.name}</button>
+                <button key={band._id} className='band-button' onClick={() => {handleClick(band.name)}}>{band.name}</button>
             ))}
         </div>
     )

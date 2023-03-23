@@ -62,37 +62,40 @@ const SearchPage = ({user}) => {
     return (
         <div className='search-page'>
             <div className='search-left'>
-                <form onSubmit={handleSubmit}>
-                    <label>
-                        Search Band:
-                        <input type="text" value={searchQuery} onChange={handleInputChange} />
-                    </label>
-                    <button type="submit">Search</button>
+                <form className='search-form' onSubmit={handleSubmit}>
+                    <input className='search-input' type="text" placeholder='Search A Band' value={searchQuery} onChange={handleInputChange} />
+                    <button className='search-button' type="submit">Search</button>
                 </form>
 
-                <div className='band-list'>
+                <div>
                     <BandList user={user} setBandResults={setBandResults} setShowResults={setShowResults} />
                 </div>
             </div>
 
             <div className='search-right'>
                 <div className='band-header'>
-                    <img src={bandResults.performers?.[0].image}/>
+                    <img className='band-image' src={bandResults.performers?.[0].images.huge}/>
                 </div>
 
                 <div className='show-results'>
                     {showResults.events?.map((event) => (
                         <div className='results' key={event.id}>
-                            <p>{event.datetime_local}</p>
-                            <p>{event.venue.name}</p>
-                            <p>{event.venue.city}, {event.venue.state}</p>
-                            {event.performers?.map((band) => (
-                                <div key={band.id}>
-                                    <p>{band.name}</p>
+                            <div className='results-left'>
+                                <p>{new Date(event.datetime_local).toDateString()}</p>
+                            </div>
+
+                            <div className='results-right'>
+                                <p>{event.title}</p>
+                                <p>{event.venue.name}</p>
+                                <p>{event.venue.city}, {event.venue.state}</p>
+                                {/* {event.performers?.map((band) => (
+                                    <div key={band.id}>
+                                        <p>{band.name}</p>
+                                    </div>
+                                ))} */}
+                                <div>
+                                    <a href={event.url} target='blank'>Get Tickets</a>
                                 </div>
-                            ))}
-                            <div>
-                                <a href={event.url} target='blank'>Get Tickets</a>
                             </div>
                         </div>
                     ))}
