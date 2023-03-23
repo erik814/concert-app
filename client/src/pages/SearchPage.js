@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { BandList } from "./components"
+import { BandList } from "../components"
 
 const SearchPage = ({user}) => {
     const [searchQuery, setSearchQuery] = useState("");
@@ -72,7 +72,7 @@ const SearchPage = ({user}) => {
                 </form>
 
                 <div className='band-list'>
-                    <BandList.jsx user={user} />
+                    <BandList user={user} />
                 </div>
             </div>
 

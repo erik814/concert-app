@@ -1,4 +1,3 @@
-import { Search } from "../components"
 
 const HomePage = ({user}) => {
 
@@ -11,8 +10,6 @@ const HomePage = ({user}) => {
       ) : (
         <p>The user is logged in.</p>
       )}
-
-      <Search/>
     </>
   )
 }
