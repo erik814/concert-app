@@ -81,20 +81,23 @@ const SearchPage = ({user}) => {
                     {showResults.events?.map((event) => (
                         <div className='results' key={event.id}>
                             <div className='results-left'>
-                                <p>{new Date(event.datetime_local).toDateString()}</p>
+                                <p>{new Date(event.datetime_local).toLocaleString('en-US', { month: 'short', day: 'numeric' })}</p>
+                                <p>{new Date(event.datetime_local).toLocaleString('en-us', { weekday: 'short' })} - {new Date(event.datetime_local).toLocaleTimeString().substring(0, 5)}</p>
                             </div>
 
                             <div className='results-right'>
-                                <p>{event.title}</p>
-                                <p>{event.venue.name}</p>
-                                <p>{event.venue.city}, {event.venue.state}</p>
-                                {/* {event.performers?.map((band) => (
-                                    <div key={band.id}>
-                                        <p>{band.name}</p>
-                                    </div>
-                                ))} */}
+                                <div className='results-info'>
+                                    <p>{event.title}</p>
+                                    <p>{event.venue.name} - {event.venue.city}, {event.venue.state}</p>
+                                    {/* {event.performers?.map((band) => (
+                                        <div key={band.id}>
+                                            <p>{band.name}</p>
+                                        </div>
+                                    ))} */}
+                                </div>
+
                                 <div>
-                                    <a href={event.url} target='blank'>Get Tickets</a>
+                                    <a className='ticket-button' href={event.url} target='blank'>Get Tickets</a>
                                 </div>
                             </div>
                         </div>
