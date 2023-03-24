@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Unica+One&display=swap');
+
+
 $text: #d6d6d6;
 $pink: #f2c4ce;
 $peach: #f58f7c;
@@ -6,13 +9,36 @@ $medium: #6fb3b8;
 $light: #badfe7;
 $mint: #c2edce;
 
-
-
 body {
-    background-color: #f6f6f2;
+    // color: $text;
+    // background-color: #f6f6f2;
     // background-image: linear-gradient(to bottom right, #4f4f51, #2c2b30);
     background-repeat: no-repeat;
     background-attachment: fixed;
+    font-family: 'Roboto', sans-serif
+}
+
+// header
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+        font-family: 'Unica One', cursive;
+        margin-left: 15px;
+    }
+
+    .navbar-nav {
+        display: flex;
+        list-style-type: none;
+
+        .nav-link {
+            text-decoration: none;
+            margin-right: 20px;
+        }
+    }
 }
 
 
@@ -75,10 +101,33 @@ body {
 
         .band-header{
 
-
             .band-image {
                 width: 100%;
                 height: auto;
+            }
+        }
+
+        .show-results {
+
+            .results {
+                display: flex;
+                border: 1px solid black;
+
+                .results-left {
+                    width: 20%;
+                }
+
+                .results-right {
+                    width: 80%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-right: 10px;
+
+                    .results-info {
+                        padding-right: 10px;
+                    }
+                }
             }
         }
     }
